@@ -21,35 +21,35 @@ Collider.DETECTOR = 'ILD'
 comp_zz = cfg.Component(
     'zz',
     files = [
-        os.path.abspath('pythia_gen/ee_ZZ_350GeV.root')
+        os.path.abspath('./raw_ntuple/pythia/ee_ZZ_350GeV.root')
     ]
 )
 
 comp_ww = cfg.Component(
     'ww',
     files = [
-        os.path.abspath('pythia_gen/ee_WW_350GeV.root')
+        os.path.abspath('./raw_ntuple/pythia/ee_WW_350GeV.root')
     ]
 )
 
 comp_hz = cfg.Component(
     'hz',
     files = [
-        os.path.abspath('pythia_gen/ee_HZ_350GeV.root')
+        os.path.abspath('./raw_ntuple/pythia/ee_HZ_350GeV.root')
     ]
 )
 
 comp_tt_had = cfg.Component(
     'tt_had',
     files = [
-        os.path.abspath('pythia_gen/ee_tthad_350GeV.root')
+        os.path.abspath('./raw_ntuple/pythia/ee_tthad_350GeV.root')
     ]
 )
 
 comp_tt_lep = cfg.Component(
     'tt_lep',
     files = [
-        os.path.abspath('pythia_gen/ee_ttlep_350GeV.root')
+        os.path.abspath('./raw_ntuple/pythia/ee_ttlep_350GeV.root')
     ]
 )
 
@@ -98,7 +98,7 @@ tree = cfg.Analyzer(
 )
 
 
-sequence = cfg.Sequence([
+sequence = cfg.Sequence(
                         source,
                         gen_particles_sequence,
                         papas_sequence(Collider.DETECTOR),
@@ -108,7 +108,7 @@ sequence = cfg.Sequence([
                         missing_energy_sequence(Collider.SQRTS),
                         top_constrainer_sequence(Collider.SQRTS),
                         tree
-                        ])
+                        )
 
 
 from ROOT import gSystem

@@ -21,7 +21,7 @@ Collider.DETECTOR = 'ILD'
 comp_tt = cfg.Component(
     'tt_semilep_ILD',
     files = [
-        os.path.abspath('../lhe/eett_semilep_350GeV.root')
+        os.path.abspath('./raw_ntuple/madgraph/eett_semilep_350GeV.root')
     ]
 )
 comp_tt.splitFactor = len(comp_tt.files)

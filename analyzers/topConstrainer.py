@@ -2,7 +2,7 @@ from numpy import array, zeros, dot, sign, copy, linalg, delete, insert
 from numpy.random import random
 from math import atan, log, cos, sin, sqrt
 from ROOT import TLorentzVector
-from copy import copy,deepcopy
+from copy import copy, deepcopy
 
 class topConstrainer:
 

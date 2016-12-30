@@ -3,7 +3,7 @@ from ROOT import TVector3, TLorentzVector
 from heppy.papas.path import Helix
 import math
 import random
-from utils.computeIP import *
+from heppy.utils.computeIP import *
 
 debug = False
 

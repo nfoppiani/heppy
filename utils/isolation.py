@@ -1,5 +1,5 @@
-from utils.delta_alpha import delta_alpha
-from utils.pt_wrt_axis import pt_wrt_axis
+from heppy.utils.delta_alpha import delta_alpha
+from heppy.utils.pt_wrt_axis import pt_wrt_axis
 
 debug = False
 

@@ -1,5 +1,5 @@
 from heppy.framework.analyzer import Analyzer
-from utils.isolation import IsolationComputer, IsolationInfo
+from heppy.utils.isolation import IsolationComputer, IsolationInfo
 
 
 pdgids = [211, 22, 130]

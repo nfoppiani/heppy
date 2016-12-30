@@ -1,6 +1,6 @@
 from heppy.framework.analyzer import Analyzer
-from utils.delta_alpha import delta_alpha
-from utils.second_smallest_number import second_smallest_number
+from heppy.utils.delta_alpha import delta_alpha
+from heppy.utils.second_smallest_number import second_smallest_number
 
 class MCbQuarks(Analyzer):
     '''
