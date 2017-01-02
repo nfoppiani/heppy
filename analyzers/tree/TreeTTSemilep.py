@@ -14,7 +14,7 @@ class TreeTTSemilep(Analyzer):
                               'recreate')
         self.tree = Tree( 'events', '')
 
-        var(self.tree, 'ev_number')
+        var(self.tree, 'ev_number', int)
 
         bookMyParticle(self.tree, 'mc_lepton')
         bookMyParticle(self.tree, 'mc_neutrino')

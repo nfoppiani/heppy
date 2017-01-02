@@ -116,7 +116,7 @@ def fillMyLepton( tree, pName, lepton ):
 # MC B QUARK
 def bookMCbQuark(tree, pName):
     bookMyP4(tree, pName)
-    var(tree, '{pName}_index_nearest_jet'.format(pName=pName) )
+    var(tree, '{pName}_index_nearest_jet'.format(pName=pName), int)
     var(tree, '{pName}_delta_alpha_wrt_nearest_jet'.format(pName=pName) )
     bookMyJet(tree, '{pName}_nearest_jet'.format(pName=pName) )
 
@@ -194,7 +194,7 @@ def fillJetsShape(tree, event):
 # COUNT CHARGED TRACKS
 def bookChargedTracks(tree):
     var(tree, 'e_rec_charged')
-    var(tree, 'n_rec_charged')
+    var(tree, 'n_rec_charged', int)
 
 def fillChargedTracks(tree, event):
     if hasattr(event, 'e_rec_charged'):
@@ -217,7 +217,7 @@ def fillMissingEnergy(tree, event):
 
 # TOP CONSTRAINER
 def bookTopConstrainer(tree):
-    var(tree, 'success')
+    var(tree, 'success', int)
     var(tree, 'chi2_algorithm')
     var(tree, 'tophadRec')
     var(tree, 'whadRec')
