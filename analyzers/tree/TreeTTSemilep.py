@@ -1,7 +1,6 @@
 from heppy.framework.analyzer import Analyzer
 from heppy.statistics.tree import Tree
-from heppy.analyzers.ntuple import *
-from heppy.utils.my_ntuple import *
+from heppy.analyzers.ntuple_mod import *
 
 from ROOT import TFile
 
@@ -9,10 +8,8 @@ class TreeTTSemilep(Analyzer):
 
     def beginLoop(self, setup):
         super(TreeTTSemilep, self).beginLoop(setup)
-        self.rootfile = TFile('/'.join([self.dirName,
-                                        'tree.root']),
-                              'recreate')
-        self.tree = Tree( 'events', '')
+        self.rootfile = TFile('/'.join([self.dirName, 'tree.root']), 'recreate')
+        self.tree = Tree('events', '')
 
         var(self.tree, 'ev_number', int)
 
