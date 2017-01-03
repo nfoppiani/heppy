@@ -4,17 +4,43 @@ from math import atan, log, cos, sin, sqrt
 from ROOT import TLorentzVector
 from copy import copy, deepcopy
 
-class topConstrainer:
+class topConstrainer(object):
+    """Kinematic contrainer for ttbar semileptonic decay.
+
+    Giving it the 4momenta of the jets, and the lepton, the btags of the jets,
+    the center-of-mass energy and the theory value (like mtop and mw), it does:
+    - compute the missing energy (that is interpreted as a neutrino)
+    - search for the correct pairing of the jets, lepton and neutrino to reconstruct
+    the W bosons and the top quarks decaying leptonic and hadronic.
+
+    The problem has:
+    8 constraint
+        - 4 energy-momenta conservation
+        - 4 invariant masses for W bosons and top quarks
+    8 unknowns
+        - 4 jet energies, assuming the direction to be well measured
+        - 4 components of the missing energy (massive neutrino when you are
+        dealing with an electron or a muon coming from a tau decay)
+        - NB: it is assumed that the lepton is well measured
+    The 8 equations can be solved linearizing the problem and iterating until
+    the procedure converges.
+
+    A few combination (according to the btag of the jets) are used.
+    If the procedure converges for one of these combination, the event is
+    classified as ttbar semileptonic, and both the well paired combination and
+    the "fitted" energy are given back.
+    """
 
     def __init__(self, jets, btags, lepton, com, mw=80.4, mtop=173., verbosity=-1):
-        # Arguments
-        # jets = array of 4 TLorentzVector's
-        # btags = array of btags for the jets (dimension N)
-        # lepton: charged lepton (electron, muon, or tau decay products)
-        # com = centre-of-mass energy
-        # mw = W mass
-        # mtop = top mass
-        #
+        """
+        Arguments
+        jets = list of 4 TLorentzVector's
+        btags = list of btags for the jets (dimension N)
+        lepton: charged lepton (electron, muon, or tau decay products)
+        com = centre-of-mass energy
+        mw = W mass
+        mtop = top mass
+        """
         self.mw = mw
         self.mtop = mtop
         self.com = com

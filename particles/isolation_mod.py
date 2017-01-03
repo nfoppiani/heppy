@@ -1,21 +1,19 @@
 from heppy.utils.delta_alpha import delta_alpha
 from heppy.utils.pt_wrt_axis import pt_wrt_axis
 
-debug = False
-
 class Area(object):
-    '''Base Area interface.'''
+    """Base Area interface."""
     def is_inside(self, *args):
-        '''returns True if *args describes a particle inside the Cone.
-        *args may be the particle itself, assuming it has eta() and phi() methods,
-        or eta, phi.
-        '''
+        """returns True if *args describes a particle inside the Cone.
+        *args may be the particle itself, or the correct attributes to compute
+        the isolation.
+        """
         pass
 
 class Cone(Area):
-    '''Cone in the 3D space.'''
+    """Cone in the 3D space."""
     def  __init__(self, alpha):
-        '''Create a cone of angle alpha'''
+        """Create a cone of angle alpha"""
         self.alpha = alpha
 
     def is_inside(self, *args):
@@ -24,17 +22,17 @@ class Cone(Area):
 
 
 class IsolationInfo(object):
-    '''Holds the results of an isolation calculation.'''
+    """Holds the results of an isolation calculation."""
     def __init__(self, label, lepton):
-        '''Create an IsolationInfo.
+        """Create an IsolationInfo.
         Attributes:
-         lepton    = the lepton
-         particles = list of particles around the lepton used in the calculation.
-                     the following quantities are computed for these particles
-         pt_wrt_lepton = total pT of the particles wrt to lepton momentum
-         sume  = total energy for the particles
-         num   = total number of particles
-        '''
+        - lepton    = the lepton
+        - particles = list of particles around the lepton used in the calculation.
+        the following quantities are computed for these particles
+        - pt_wrt_lepton = total pT of the particles wrt to lepton momentum
+        - sume  = total energy for the particles
+        - num   = total number of particles
+        """
         self.particles = []
         self.label = label
         self.lepton = lepton
@@ -44,7 +42,7 @@ class IsolationInfo(object):
 
 
     def add_particle(self, ptc):
-        '''Add a new particle and update counters.'''
+        """Add a new particle and update counters."""
         self.particles.append(ptc)
         self.sume += ptc.e()
         self.num += 1
@@ -58,7 +56,7 @@ class IsolationInfo(object):
         return self
 
     def __str__(self):
-        return 'iso {label:>3}: sumpt = {sumpt:5.2f}, sume = {sume:5.2f}, num = {num}'.format(
+        return 'iso {label:>3}: pt_wrt_lepton = {pt_wrt_lepton:5.2f}, sume = {sume:5.2f}, num = {num}'.format(
             label = self.label,
             pt_wrt_lepton = self.pt_wrt_lepton,
             sume = self.sume,
@@ -68,14 +66,13 @@ class IsolationInfo(object):
 
 
 class IsolationComputer(object):
-    '''Computes isolation for a given lepton.'''
+    """Computes isolation for a given lepton."""
 
     def __init__(self, on_areas, off_areas=None,
-                 pt_thresh=0, e_thresh=0, label=''):
-        '''Creates the isolation computer.
+                 e_thresh=0, label=''):
+        """Creates the isolation computer.
         Particles around the lepton are considered in the isolation if:
-        - they pass both thresholds:
-          pt_thresh : pt threshold
+        - they pass the threshold:
           e_thresh  : energy threshold
         - they are in an active area around the lepton
         areas should
@@ -83,21 +80,20 @@ class IsolationComputer(object):
         around the should be considered
         or ignored, respectively.
         for a given particle
-        '''
+        """
 
         self.on_areas = on_areas
         if off_areas is None:
             off_areas = []
         self.off_areas = off_areas
-        self.pt_thresh = pt_thresh
         self.e_thresh = e_thresh
         self.label = label
 
 
-    def compute(self, lepton, particles):
-        '''Compute the isolation for lepton, using particles.
+    def compute(self, lepton, particles, debug = False):
+        """Compute the isolation for lepton, using particles.
         returns an IsolationInfo.
-        '''
+        """
         isolation = IsolationInfo(self.label, lepton)
         if debug:
             print
@@ -111,7 +107,7 @@ class IsolationComputer(object):
                 print
                 print ptc
                 print delta_alpha(lepton, ptc)
-            if ptc.e()<self.e_thresh or ptc.pt()<self.pt_thresh:
+            if ptc.e()<self.e_thresh:
                 continue
             is_on = False
             for area in self.on_areas:

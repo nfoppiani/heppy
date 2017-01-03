@@ -1,6 +1,4 @@
 from heppy.framework.analyzer import Analyzer
-from heppy.particles.tlv.particle import Particle
-from heppy.particles.genbrowser import GenBrowser
 from heppy.particles.tlv.resonance import Resonance
 
 class MCLeptonFinder(Analyzer):

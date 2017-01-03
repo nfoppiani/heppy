@@ -1,4 +1,5 @@
 #!/bin/env python
+"""Book and fill functions specialized for e+e- collision and top mass analysis."""
 
 def var(tree, varName, type=float):
     tree.var(varName, type)

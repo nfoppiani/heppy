@@ -10,11 +10,11 @@ leptons = cfg.Analyzer(
 )
 
 
-from heppy.analyzers.IsolationAnalyzer import IsolationAnalyzer
+from heppy.analyzers.IsolationAnalyzer_mod import IsolationAnalyzer
 from heppy.particles.isolation_mod import Cone
 iso_leptons = cfg.Analyzer(
     IsolationAnalyzer,
-    leptons = 'leptons',
+    candidates = 'leptons',
     particles = 'rec_particles',
     iso_area = Cone(0.3)
 )

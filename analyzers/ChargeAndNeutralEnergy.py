@@ -1,14 +1,16 @@
 from heppy.framework.analyzer import Analyzer
 
 class ChargeAndNeutralEnergy(Analyzer):
-    '''
-    from analyzers.ChargeAndNeutralEnergy import ChargeAndNeutralEnergy
+    '''Energy and number of particles, total, charged, photons and neutral, both
+    generated and reconstructed.
+
+    Here is an example:
+    from heppy.analyzers.ChargeAndNeutralEnergy import ChargeAndNeutralEnergy
     charge_neutral_energy = cfg.Analyzer(
         ChargeAndNeutralEnergy,
         rec_particles = 'rec_particles',
         gen_particles_stable = 'gen_particles_stable',
     )
-
     '''
 
     def process(self, event):
@@ -61,7 +63,6 @@ class ChargeAndNeutralEnergy(Analyzer):
             else:
                 rec_neutral += rec_ptc.e()
                 n_rec_neutral += 1
-
 
         event.gen_energy = gen_energy
         event.gen_charged = gen_charged

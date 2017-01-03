@@ -5,13 +5,25 @@ from heppy.utils.delta_alpha import delta_alpha
 from heppy.utils.pt_wrt_axis import pt_wrt_axis
 
 class JetsInvariantMasses(Analyzer):
-    '''
-    from analyzers.JetsInvariantMasses import JetsInvariantMasses
+    '''Store some variables related to the invariant masses of the jets.
+
+    The analyzer computes:
+    - four_jets_mass: invariant mass of the jets in the event
+    - the invariant mass of every possible pair of jets
+    then store:
+    - four_jets_mass
+    - min_jets_mass: smallest invariant mass of a pair of jets
+    - second_min_jets_mass: next to smallest invariant mass of a pair of jets
+
+    Here is an example:
+    from heppy.analyzers.JetsInvariantMasses import JetsInvariantMasses
     jets_variables = cfg.Analyzer(
       JetsInvariantMasses,
       jets = 'jets',
       leptons = 'sel_iso_leptons'
     )
+
+    TODO: expand documentation with new variables
     '''
 
     def process(self, event):

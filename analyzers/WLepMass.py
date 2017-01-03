@@ -2,14 +2,11 @@ from heppy.framework.analyzer import Analyzer
 from heppy.particles.tlv.resonance import Resonance
 
 class WLepMass(Analyzer):
-    '''WRITEEEE
-
-    from analyzers.WLepMass import WLepMass
+    '''
+    from heppy.analyzers.WLepMass import WLepMass
     w_lep_mass = cfg.Analyzer(
         WLepMass,
-
     )
-
     '''
 
     def process(self, event):

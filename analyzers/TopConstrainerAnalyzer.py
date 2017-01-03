@@ -1,6 +1,6 @@
 from heppy.framework.analyzer import Analyzer
 from heppy.particles.tlv.particle import Particle
-from topConstrainer import topConstrainer
+from heppy.utils.topConstrainer import topConstrainer
 
 w_pdgid = 24
 top_pdgid = 6

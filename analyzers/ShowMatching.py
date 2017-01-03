@@ -1,10 +1,9 @@
 from heppy.framework.analyzer import Analyzer
-from heppy.utils.deltar import deltaR
+from heppy.utils.delta_alpha import delta_alpha
 
 class ShowMatching(Analyzer):
-    '''WRITEEEE
-
-    from analyzers.ShowMatching import ShowMatching
+    '''
+    from heppy.analyzers.ShowMatching import ShowMatching
     show_matching = cfg.Analyzer(
         ShowMatching,
         rec_particles = 'rec_particles',
@@ -28,7 +27,7 @@ class ShowMatching(Analyzer):
             print gen_ptc
             print "match: ", gen_ptc.match
             if gen_ptc.match != None:
-                print "dr= ", deltaR(gen_ptc.theta(), gen_ptc.phi(), gen_ptc.match.theta(), gen_ptc.match.phi())
+                print "delta_alpha= ", delta_alpha(gen_ptc, gen_ptc.match)
                 print "match of the match: ", gen_ptc.match.match
                 if gen_ptc.match.match == gen_ptc:
                     print "match of the match OK"
@@ -46,7 +45,7 @@ class ShowMatching(Analyzer):
             print rec_ptc
             print "match: ", rec_ptc.match
             if rec_ptc.match != None:
-                print "dr= ", deltaR(rec_ptc.theta(), rec_ptc.phi(), rec_ptc.match.theta(), rec_ptc.match.phi())
+                print "delta_alpha= ", delta_alpha(rec_ptc, rec_ptc.match)
                 print "match of the match: ", rec_ptc.match.match
                 if rec_ptc.match.match == rec_ptc:
                     print "match of the match OK"

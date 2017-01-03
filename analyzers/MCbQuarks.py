@@ -3,8 +3,38 @@ from heppy.utils.delta_alpha import delta_alpha
 from heppy.utils.second_smallest_number import second_smallest_number
 
 class MCbQuarks(Analyzer):
-    '''
-    from analyzers.MCbQuarks import MCbQuarks
+    '''Find the montecarlo b-quarks and match them with the reconstructed jets.
+
+    Useful for ttbar analysis.
+
+    Jets collection order must not be modified because jets are sorted by btag
+    (this could be changed in  the future).
+
+    Algorithm steps:
+    - looping on gen_ptc searching for tops, and on tops daughters searching
+    for b quarks
+    - b quarks get as attribute the list of the delta_alpha wrt to the jets
+    - the matching is done looking at the closest jet (with delta_alpha) to
+    the b quark
+    - if the closest jet to the first quark is the same as the closest one to
+    the second quark:
+        - consider the closest quark to the jet of the two quarks
+        - match it with the jet
+        - the remaining quark is then matched to its next to closest jet
+
+    Each b-quark get the following attributes:
+    - index_nearest_jet: index of the matched jet
+    - nearest_jet: the matched jet
+    - delta_alpha_wrt_nearest_jet: delta alpha wrt the matched jet
+    - delta_alpha_wrtJets: list of delta alpha wrt all the jets
+
+    Then each jet get the attribute mc_b_quark_index =:
+    - 0 if it has no matching with a b-quark
+    - 1 if it is matched with the first b-quark
+    - 2 it it is matched with the second b-quark
+
+    here is an example:
+    from heppy.analyzers.MCbQuarks import MCbQuarks
     mc_b_quarks = cfg.Analyzer(
       MCbQuarks,
       output = 'mc_b_quarks',

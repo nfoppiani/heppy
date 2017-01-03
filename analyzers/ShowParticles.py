@@ -1,10 +1,9 @@
 from heppy.framework.analyzer import Analyzer
-from heppy.particles.tlv.particle import Particle
 
 class ShowParticles(Analyzer):
 
     '''
-    from analyzers.ShowParticles import ShowParticles
+    from heppy.analyzers.ShowParticles import ShowParticles
     show_particles = cfg.Analyzer(
         ShowParticles,
         gen_particles = 'gen_particles',
