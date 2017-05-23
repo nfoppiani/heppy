@@ -39,15 +39,15 @@ comp_hz = cfg.Component(
     ]
 )
 
-comp_tt_had = cfg.Component(
-    'tt_had',
+comp_tt_allhad = cfg.Component(
+    'tt_allhad',
     files = [
         os.path.abspath('./raw_ntuple/pythia/ee_tthad_350GeV.root')
     ]
 )
 
-comp_tt_lep = cfg.Component(
-    'tt_lep',
+comp_tt_dilep = cfg.Component(
+    'tt_dilep',
     files = [
         os.path.abspath('./raw_ntuple/pythia/ee_ttlep_350GeV.root')
     ]
@@ -57,8 +57,8 @@ selectedComponents = [
                         comp_zz,
                         comp_ww,
                         comp_hz,
-                        comp_tt_had,
-                        comp_tt_lep,
+                        comp_tt_allhad,
+                        comp_tt_dilep,
                      ]
 
 for component in selectedComponents:
